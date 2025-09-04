@@ -9,7 +9,7 @@ A pipeline to extract and analyze body postures from recordings of crawling C. e
 
 
   ## Tutorial
-  The tutorial illustrates the use of the whole pipeline. We provide example data of WT C. elegans worms (to be precise: young adult worms of the CGC1 strain, previously fed with RosettaTM 2 bacteria transformed with the empty pET-22b vector). The example data constitutes 1min recording of multiple worms on an NGM plate as tiff files of 5120x5120 pixels with a frame rate of 30fps.
+  The tutorial illustrates the use of the whole pipeline. We provide example data of WT C. elegans worms (to be precise: young adult worms of the CGC1 strain, previously fed with RosettaTM 2 bacteria transformed with the empty pET-22b vector), which can be found here: ??? (44GB). The example data constitutes 1min recording of multiple worms on an NGM plate as tiff files of 5120x5120 pixels with a frame rate of 30fps.
 
   ## Other scripts
   Besides the main pipeline, we also provide additional scripts.
