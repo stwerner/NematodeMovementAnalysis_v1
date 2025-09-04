@@ -7,3 +7,7 @@ A pipeline to extract and analyze body postures from recordings of crawling C. e
   The pipeline includes the following steps:
   1)
 
+
+  ## Tutorial
+  The tutorial illustrates the use of the whole pipeline. We provide example data of WT C. elegans worms (to be precise: young adult worms of the CGC1 strain, previously fed with RosettaTM 2 bacteria transformed with the empty pET-22b vector). The example data constitutes 1 min recording of multiple worms on an NGM plate.
+
