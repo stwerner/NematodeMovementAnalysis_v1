@@ -18,7 +18,7 @@ A pipeline to extract and analyze body postures from recordings of crawling C. e
   It is also the first tiff image copied as a reference.
   Further input is an intensity threshold to identify objects and a frame rate at which the movement is inspected.
   ```
-  Crop2PathTiff2H5(inputfolder, outputfolder, imagethreshold, inspectionrate)
+  Crop2PathTiff2H5(inputfolder, outputfolder, imagethreshold, inspectionrate);
   ```
 
   
