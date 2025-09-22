@@ -1,9 +1,23 @@
 % Crop C. elegans recordings to worm path by user input to specify region
 % of interest.
-% Input: folder with subfolders of tiff files corresponding recordings
-% Output: h5 files
-% SW, 10/04/24
+%
+% Input:
+% - folder with subfolders of tiff files, each folder corresponds to a
+% recording, each tiff file to a frame, the tiff-files are named like
+% somethingarbitrary_0001.tiff, where the number of trailing zeros is
+% arbitrary as well
+% - name of the folder where output is stored
+% - an approximate threshold to distinguish worms from background
+% - the frames from which worms are extracted, e.g. if inspectrate=300, it
+% take the worm 1, 301, 601,...
+%
+% Output:
+% - h5 files in specified output folder
+% - first tiff file as a reference
+%
+% SW, 01/09/25
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 function Crop2PathTiff2H5(inputpath,outputpath,imthr,inspectrate)
 
@@ -32,6 +46,7 @@ while icount<allfoldersN
         pos1=strfind(filelist(i).name,'_');
         pos1=pos1(end)+1;
         pos2=strfind(filelist(i).name,'.')-1;
+        pos2=pos2(end);
         sortlist(i)=str2double(filelist(i).name(pos1:pos2));
     end
     filelistunsorted=filelist;
@@ -99,9 +114,12 @@ end
 
 
 %% Crop and save it
+tic;
 wormlogsize=size(wormlog,1);
 for j=1:wormlogsize
     myra=wormlog(j,2:5);
+
+    disp(['Processing: ', allfolders(wormlog(j,1)).name])
 
     fileout=[outputpath,allfolders(wormlog(j,1)).name,...
         '-',num2str(myra(1)),'-',num2str(myra(3)),'.h5'];
@@ -135,6 +153,7 @@ for j=1:wormlogsize
 
     copyfile([datapath,filelist(1).name],...
         [outputpath,allfolders(wormlog(j,1)).name,'Ref.tiff'])
+    toc;
 end
 
 end
