@@ -1,4 +1,8 @@
 % Tutorial on extracting worm shapes over time
+%
+% Before starting, create a folder "ÍnputTiff" and save the "Data1"-file there.
+% Furthermore, create a folder "OutputFolder".
+%
 % SW, 24/12/26
 %%%%%%
 
@@ -206,6 +210,27 @@ inputpath = 'OutputFolder\'; %Specify input data
 dataids={'Data1'}; %multiple data sets possible {...; ...}
 fileN=1800;
 CombineContinuousPieces(inputpath,dataids,fileN)
+
+
+%% --- Extract scale conversion from petridish size
+clear variables
+inputpath='OutputFolder\';
+tifffile='Data1Ref.tiff';
+in1=imread([inputpath,tifffile]);
+in2=imgaussfilt(in1,3);
+imbw = edge(in2,'Prewitt'); %detect edges
+imbw1 = imclose(imbw,strel('disk',3));
+imbw2 = bwareaopen(imbw1, 200000);
+imbw3 = imclose(imbw2,strel('disk',20));
+[circy,circx] = find(imbw3>0);
+[xc,yc,R,~] = fitcircle(circx,circy);
+figure(1), clf
+imshow(in1), hold on
+angle=(0:0.01:2).*pi;
+plot(xc+R*cos(angle),yc+R*sin(angle),'r')
+title(['Radius: ',num2str(R,'%.1f'),'px'])
+disp(['Conversion: ',num2str(35/R/2,'%.5f'),'mm/px']) %dish diamter 35mm
+
 
 
 
